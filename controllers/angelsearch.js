@@ -16,6 +16,7 @@ AngelSearch.search = function(query) {
 
   var cached = queries.findOne({ query: query });
   if (cached) {
+    console.log('cache hit!');
     deferred.resolve(cached.data);
   } else {
     request(ANGELLIST_URL + 'q=' + query, function(err, response, body) {

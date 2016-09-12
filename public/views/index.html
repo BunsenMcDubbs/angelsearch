@@ -7,13 +7,71 @@
   <!-- <link rel='stylesheet' href='//fonts.googleapis.com/css?family=font1|font2|etc' type='text/css'> -->
   </head>
   <body>
-    <h1>Welcome to AngelSearch</h1>
+    <header class="navbar navbar-default">
+      <div class="container-fluid"></div>
+      <div class="navbar-header">
+        <div class="navbar-brand">Welcome to AngelSearch</div>
+      </div>
+      <div class="navbar-form navbar-left">
+        <div class="form-group">
+          <input id="search" class="form-control" type="text" placeholder="search">
+        </div>
+      </div>
+    </header>
 
-    <input class="search" type="text" name="search">
+    <div class="container">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div id="resultsList" class="panel-body list-group">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Locations</h3>
+          </div>
+          <div id="locationsList" class="panel-body list-group">
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Types</h3>
+          </div>
+          <div id="typesList" class="panel-body list-group">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script id="resultTemplate" type="text/x-jsrender">
+      <div class="result list-group-item">
+        <h5 class="name">{{:name}}</h5>
+        <div class="type text-muted">{{:type}}</div>
+        <div class="location text-muted">{{:location}}</div>
+      </div>
+    </script>
+
+    <script id="locationTemplate" type="text/x-jsrender">
+      <div class="location-display list-group-item">
+        <span class="badge">{{:count}}</span>
+        <div class="name">{{:name}}</div>
+      </div>
+    </script>
+
+    <script id="typeTemplate" type="text/x-jsrender">
+      <div class="type-display list-group-item">
+        <span class="badge">{{:count}}</span>
+        <div class="name">{{:name}}</div>
+      </div>
+    </script>
 
     <script src="bower_components/underscore/underscore.js" charset="utf-8"></script>
     <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js" charset="utf-8"></script>
+    <script src="bower_components/jsrender/jsrender.js" charset="utf-8"></script>
     <script src="scripts/main.js" charset="utf-8"></script>
   </body>
 </html>
