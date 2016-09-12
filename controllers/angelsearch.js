@@ -2,18 +2,35 @@ var request = require('request');
 var cheerio = require('cheerio');
 var Q = require('q');
 
+var loki = require('lokijs');
+var db = new loki('queryCache.json');
+var queries = db.addCollection('queries', {
+  unique: ['query']
+});
+
 var AngelSearch = {};
 var ANGELLIST_URL = 'https://angel.co/search?';
 
 AngelSearch.search = function(query) {
   var deferred = Q.defer();
-  request(ANGELLIST_URL + 'q=' + query, function(err, response, body) {
-    if (err) {
-      deferred.reject(err);
-    } else {
-      deferred.resolve(parseSearchHTML(body));
-    }
-  });
+
+  var cached = queries.findOne({ query: query });
+  if (cached) {
+    deferred.resolve(cached.data);
+  } else {
+    request(ANGELLIST_URL + 'q=' + query, function(err, response, body) {
+      if (err) {
+        deferred.reject(err);
+      } else {
+        var results = parseSearchHTML(body);
+        queries.insert({
+          query: query,
+          data: results,
+        });
+        deferred.resolve(results);
+      }
+    });
+  }
   return deferred.promise;
 };
 
