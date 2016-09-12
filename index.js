@@ -5,10 +5,19 @@ var app = express();
 app.use('/', express.static('public/views'));
 app.use(express.static('public'));
 
+// controllers
+var AngelSearchCtrl = require('./controllers/angelsearch');
+
 // ajax routes
 app.get('/search', function (req, res) {
-  console.log('search!', req.query.q);
-  res.send(req.query.q);
+  var query = req.query.q;
+  console.log('search!', query);
+  AngelSearchCtrl.search(query)
+    .then(function(results) {
+      res.send({
+        results: results,
+      });
+    });
 });
 
 // start the server

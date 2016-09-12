@@ -11,6 +11,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "express": "^4.14.0"
+    "cheerio": "^0.22.0",
+    "express": "^4.14.0",
+    "q": "^1.4.1",
+    "request": "^2.74.0"
   }
 }

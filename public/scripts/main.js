@@ -32,4 +32,4 @@ Query.onQueryChange.push(getSearchResults);
 $('input.search').keyup(_.debounce(function(event) {
   event.preventDefault();
   Query.setQuery(event.target.value);
-}, 50));
+}, 100));
