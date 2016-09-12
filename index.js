@@ -14,9 +14,7 @@ app.get('/search', function (req, res) {
   console.log('search!', query);
   AngelSearchCtrl.search(query)
     .then(function(results) {
-      res.send({
-        results: results,
-      });
+      res.send(results);
     });
 });
 
